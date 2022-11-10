@@ -18,5 +18,11 @@ public class MemberServiceImpl implements MemberService{
 		memberMapper.memberJoin(member);
 		
 	}
+	
+	@Override
+	public int idCheck(String memberId) {
+		
+		return memberMapper.idCheck(memberId);
+	}
 
 }

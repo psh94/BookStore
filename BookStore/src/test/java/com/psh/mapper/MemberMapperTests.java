@@ -47,5 +47,26 @@ public class MemberMapperTests {
 		memberMapper.idCheck(id2);
 	}
 	
+
+	 
+    /* 로그인 쿼리 mapper 메서드 테스트 */
+    @Test
+    public void memberLogin() throws Exception{
+        
+        MemberVO member = new MemberVO();    // MemberVO 변수 선언 및 초기화
+        
+        /* 올바른 아이디 비번 입력경우 */
+        member.setMemberId("test1");
+        member.setMemberPw("test1");
+        
+        /* 올바른 않은 아이디 비번 입력경우 */
+        //member.setMemberId("test1123");
+        //member.setMemberPw("test1321321");
+        
+        memberMapper.memberLogin(member);
+        System.out.println("결과 값 : " + memberMapper.memberLogin(member));
+        
+    }
+	
 	
 }

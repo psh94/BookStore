@@ -176,6 +176,23 @@
     cursor: pointer;
 }
 
+#mail_check_input_box_false{
+    background-color:#ebebe4;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+
+.correct{
+    color : green;
+}
+.incorrect{
+    color : red;
+}
+ 
+ 
+
 /* 주소 영역 */
 .address_wrap{
 	width: 100%;

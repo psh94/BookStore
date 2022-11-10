@@ -168,6 +168,20 @@ public class MemberController {
         
         return "redirect:/main";
     }
+    
+    /* 메인페이지 로그아웃 */
+    @RequestMapping(value="logout.do", method=RequestMethod.GET)
+    public String logoutMainGET(HttpServletRequest request) throws Exception{
+        
+        logger.info("logoutMainGET메서드 진입");
+        
+        HttpSession session = request.getSession();
+        
+        session.invalidate();
+        
+        return "redirect:/main";        
+        
+    }
 	
 
 

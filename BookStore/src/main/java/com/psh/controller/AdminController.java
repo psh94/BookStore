@@ -1,14 +1,19 @@
 package com.psh.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.psh.model.AuthorVO;
+import com.psh.model.Criteria;
+import com.psh.model.PageDTO;
 import com.psh.service.AuthorService;
 
 @Controller
@@ -48,8 +53,21 @@ public class AdminController {
     
     /* 작가 관리 페이지 접속 */
     @RequestMapping(value = "authorManage", method = RequestMethod.GET)
-    public void authorManageGET() throws Exception{
-        logger.info("작가 관리 페이지 접속");
+    public void authorManageGET(Criteria cri, Model model) throws Exception{
+    	
+    	logger.info("작가 관리 페이지 접속.........." + cri);
+        
+        /* 작가 목록 출력 데이터 */
+        List list = authorService.authorGetList(cri);
+        
+        if(!list.isEmpty()) {
+			model.addAttribute("list",list);	// 작가 존재 경우
+		} else {
+			model.addAttribute("listCheck", "empty");	// 작가 존재하지 않을 경우
+		}
+        
+        /* 페이지 이동 인터페이스 데이터 */
+        model.addAttribute("pageMaker", new PageDTO(cri, authorService.authorGetTotal(cri)));
     }   
     
     /* 작가 등록*/    

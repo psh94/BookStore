@@ -11,5 +11,28 @@
  
       </insert>
       
+      <select id="authorGetList" resultType="com.psh.model.AuthorVO">
+    
+        select  authorId, authorName, nationId, regDate, updateDate from psh_author 
+        <if test="keyword != null">
+            where authorName like CONCAT('%',#{keyword}, '%')
+        </if>
+        order by authorId DESC limit #{skip}, #{amount}    
+    
+    </select>
+    
+    <!-- 작가 수 -->
+      <select id="authorGetTotal" resultType="int">
+      
+          select count(*) from psh_author
+          
+          <if test="keyword != null">
+          
+              where authorName like CONCAT('%', #{keyword}, '%');
+          
+          </if>
+          
+      </select>
+      
       
   </mapper>

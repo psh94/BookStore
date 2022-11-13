@@ -57,4 +57,16 @@ public class AuthorMapperTests {
         System.out.println("total....." + total);
         
     }
+    
+    /* 작가 상세 페이지 */
+	@Test
+	public void authorGetDetailTest() {
+		
+		int authorId = 30;
+		
+		AuthorVO author = mapper.authorGetDetail(authorId);
+		
+		System.out.println("author......." + author);
+		
+	}
 }

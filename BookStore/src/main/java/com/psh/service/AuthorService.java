@@ -12,6 +12,9 @@ public interface AuthorService {
     public List<AuthorVO> authorGetList(Criteria cri) throws Exception;
     
     public int authorGetTotal(Criteria cri) throws Exception;    
+    
+	public AuthorVO authorGetDetail(int authorId) throws Exception;
+
 
 
 

@@ -203,6 +203,11 @@ ul{
     font-size: 25px;
 }
 
+.author_table a{
+	color:#1088ed;
+	font-weight: 500;
+}
+
 
 	/* 페이지 버튼 인터페이스 */
 .pageMaker_wrap{

@@ -34,5 +34,12 @@
           
       </select>
       
+      <!-- 작가 디테일 페이지 -->
+  	<select id="authorGetDetail" resultType="com.psh.model.AuthorVO">
+  	
+  		select * from psh_author where authorId = #{authorId}
+  	
+  	</select>
+      
       
   </mapper>

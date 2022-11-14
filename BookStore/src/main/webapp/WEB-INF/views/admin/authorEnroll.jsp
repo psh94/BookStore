@@ -77,6 +77,7 @@ $("#enrollBtn").click(function(){
     let authorName = $('input[name=authorName]').val();        // 작가 이름
     let nationId = $('select[name=nationId]').val();        // 소속 국가
     let authorIntro = $('input[name=authorIntro]').val();    // 작가 소개
+    
     /* 공란 경고 span태그 */
     let wAuthorName = $('#warn_authorName');
     let wNationId = $('#warn_nationId');

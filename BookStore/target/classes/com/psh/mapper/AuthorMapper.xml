@@ -40,6 +40,13 @@
   		select * from psh_author where authorId = #{authorId}
   	
   	</select>
+  	
+  	<!-- 작가 내용 수정 -->
+	<update id="authorModify">
+	
+		update psh_author set authorName=#{authorName}, nationId=#{nationId}, authorIntro=#{authorIntro}, updateDate=now() where authorId = #{authorId}
+	
+	</update>
       
       
   </mapper>

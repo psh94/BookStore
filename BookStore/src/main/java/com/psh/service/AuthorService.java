@@ -15,6 +15,8 @@ public interface AuthorService {
     
 	public AuthorVO authorGetDetail(int authorId) throws Exception;
 
+	public int authorModify(AuthorVO author) throws Exception;
+
 
 
 

@@ -223,6 +223,15 @@ input[name='publeYear'] {
 }
 
 
+/* 할인 가격 문구 */
+.step_val{						
+	display: block;
+    padding-top: 5px;
+    font-weight: 500;
+}
+
+
+
 
 
 /* footer navai 영역 */

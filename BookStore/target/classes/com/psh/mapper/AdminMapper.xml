@@ -17,6 +17,34 @@
   		select * from psh_bcate order by cateCode
   	
   	</select>
+  	
+  	
+  	<!-- 상품 리스트 -->
+	<select id="goodsGetList" resultType="com.psh.model.BookVO">
+	
+		select  bookId, bookName,  b.authorName, c.cateName, bookStock, a.regDate from psh_book a 
+		left outer join psh_author b on a.authorId = b.authorId
+		left outer join psh_bcate c on a.cateCode = c.cateCode
+		<if test="keyword != null">
+			where (bookName like CONCAT ('%', #{keyword}, '%'))
+		</if>
+		order by bookId DESC 
+		limit #{skip}, #{amount}		
+	
+	</select>
+	
+	<!-- 상품 총 갯수 -->
+  	<select id="goodsGetTotal" resultType="int">
+  	
+  		select count(*) from psh_book
+  		
+  		<if test="keyword != null">
+  		
+  			where bookName like CONCAT('%' , #{keyword}, '%')
+  		
+  		</if>
+  	
+  	</select>
 
 
 

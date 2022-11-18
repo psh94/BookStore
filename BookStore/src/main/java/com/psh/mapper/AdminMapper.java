@@ -16,5 +16,7 @@ public interface AdminMapper {
 	
 	public int goodsGetTotal(Criteria cri);
 	
+	public BookVO goodsGetDetail(int bookId);
+	
 
 }

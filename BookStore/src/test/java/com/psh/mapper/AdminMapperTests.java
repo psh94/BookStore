@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.psh.model.BookVO;
 import com.psh.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -63,6 +64,19 @@ public class AdminMapperTests {
 		/* 상품 총 갯수 */
 		int result = mapper.goodsGetTotal(cri);
 		System.out.println("resutl.........." + result);
+		
+		
+	}
+	
+	/* 상품 조회 페이지 */
+	@Test
+	public void goodsGetDetailTest() {
+		
+		int bookId = 150;
+		
+		BookVO result = mapper.goodsGetDetail(bookId);
+		
+		System.out.println("상품 조회 데이터 : " + result);
 		
 		
 	}

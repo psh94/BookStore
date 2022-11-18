@@ -45,6 +45,15 @@
   		</if>
   	
   	</select>
+  	
+  	<!-- 상품 조회 페이지 -->
+	<select id="goodsGetDetail" resultType="com.psh.model.BookVO">
+	
+		select bookId, bookName, (select authorName from psh_author where authorId =psh_book.authorId) authorName, 
+			authorId, publeYear, publisher, cateCode, bookPrice, bookStock, bookDiscount, bookIntro, bookContents, regDate, updateDate 
+		from psh_book where bookId = #{bookId}
+	
+	</select>
 
 
 

@@ -47,6 +47,12 @@
 		update psh_author set authorName=#{authorName}, nationId=#{nationId}, authorIntro=#{authorIntro}, updateDate=now() where authorId = #{authorId}
 	
 	</update>
+	
+	<delete id="authorDelete">
+  	
+  		delete from psh_author where authorId = #{authorId}
+  	
+  	</delete>
       
       
   </mapper>

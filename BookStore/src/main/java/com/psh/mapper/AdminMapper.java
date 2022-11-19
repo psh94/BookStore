@@ -18,5 +18,9 @@ public interface AdminMapper {
 	
 	public BookVO goodsGetDetail(int bookId);
 	
+	public int goodsModify(BookVO vo);
+	
+	public int goodsDelete(int bookId);
+
 
 }

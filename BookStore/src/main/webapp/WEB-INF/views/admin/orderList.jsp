@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/admin/authorManage.css">
+<link rel="stylesheet" href="../resources/css/admin/orderList.css">
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
@@ -20,34 +20,41 @@
 				<%@include file="../includes/admin/header.jsp" %>
 				
                 <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>작가 관리</span></div>
+                    <div class="admin_content_subject"><span>주문 현황</span></div>
 					<div class="author_table_wrap">
 						<!-- 게시물 O -->
 						<c:if test="${listCheck != 'empty' }">
-	                    	<table class="author_table">
+	                    	<table class="order_table">
+	                    	<colgroup>
+	                    		<col width="21%">
+	                    		<col width="20%">
+	                    		<col width="20%">
+	                    		<col width="20%">
+	                    		<col width="19%%">
+	                    	</colgroup>
 	                    		<thead>
 	                    			<tr>
-	                    				<td class="th_column_1">작가 번호</td>
-	                    				<td class="th_column_2">작가 이름</td>
-	                    				<td class="th_column_3">작가 국가</td>
-	                    				<td class="th_column_4">등록 날짜</td>
-	                    				<td class="th_column_5">수정 날짜</td>
+	                    				<td class="th_column_1">주문 번호</td>
+	                    				<td class="th_column_2">주문 아이디</td>
+	                    				<td class="th_column_3">주문 날짜</td>
+	                    				<td class="th_column_4">주문 상태</td>
+	                    				<td class="th_column_5">취소</td>
 	                    			</tr>
 	                    		</thead>
 	                    		<c:forEach items="${list}" var="list">
 	                    		<tr>
-	                    			<td><c:out value="${list.authorId}"></c:out> </td>
+	                    			<td><c:out value="${list.orderId}"></c:out> </td>
+	                    			<td><c:out value="${list.memberId}"></c:out></td>
+	                    			<td><fmt:formatDate value="${list.orderDate}" pattern="yyyy-MM-dd"/></td>
+	                    			<td><c:out value="${list.orderState}"/></td>
 	                    			<td>
-	                    				<a class="move" href='<c:out value="${list.authorId}"/>'>
-	                    					<c:out value="${list.authorName}"></c:out>
-	                    				</a> 	                    				
+	                    				<c:if test="${list.orderState == '배송준비' }">
+	                    					<button class="delete_btn" data-orderid="${list.orderId}">취소</button>
+	                    				</c:if>
 	                    			</td>
-	                    			<td><c:out value="${list.nationName}"></c:out> </td>
-	                    			<td><fmt:formatDate value="${list.regDate}" pattern="yyyy-MM-dd"/></td>
-	                    			<td><fmt:formatDate value="${list.updateDate}" pattern="yyyy-MM-dd"/></td>
 	                    		</tr>
 	                    		</c:forEach>
-	                    	</table>						
+	                    	</table> 					
 						</c:if>
 						
                 		<!-- 게시물 x -->
@@ -59,9 +66,9 @@
                 			
                     </div> 
                     
-                    <!-- 검색 영역 -->
+                     <!-- 검색 영역 -->
                     <div class="search_wrap">
-                    	<form id="searchForm" action="/admin/authorManage" method="get">
+                    	<form id="searchForm" action="/admin/orderList" method="get">
                     		<div class="search_input">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
@@ -69,8 +76,10 @@
                     			<button class='btn search_btn'>검 색</button>
                     		</div>
                     	</form>
-                    </div>                    
-
+                    </div>                 
+                                       
+                </div>
+                
                     <!-- 페이지 이동 인터페이스 영역 -->
                     <div class="pageMaker_wrap" >
                     
@@ -101,70 +110,27 @@
 	                    
                     </div>
                     
-					<form id="moveForm" action="/admin/authorManage" method="get">
+					<form id="moveForm" action="/admin/orderList" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-					</form>                    
-                                       
-                </div>
+					</form>   
+					
+                    <form id="deleteForm" action="/admin/orderCancle" method="post">
+                    	<input type="hidden" name="orderId">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+						<input type="hidden" name="memberId" value="${member.memberId}">
+                    </form>						
+					                                 
  
  				<%@include file="../includes/admin/footer.jsp" %>
 
 <script>
-$(document).ready(function(){
-	
-	let result = '<c:out value="${enroll_result}"/>';
-	let mresult = '<c:out value="${modify_result}"/>';
-	
-	checkResult(result);
-	checkmResult(mresult);
-	
-	function checkResult(result){
-		
-		if(result === ''){
-			return;
-		}
-		
-		alert("작가'${enroll_result}'을 등록하였습니다.");
-		
-	}
-	
-	function checkmResult(mresult){
-		
-		if(mresult === '1'){
-			alert("작가 정보 수정을 완료하였습니다.");
-		} else if(mresult === '0') {
-			alert("작가 정부 수정을 하지 못하였습니다.")	
-		}
-		
-	}
-	
-	/* 삭제 결과 경고창 */
-	let delete_result = '${delete_result}';
-	
-	if(delete_result == 1){
-		alert("삭제 완료");
-	} else if(delete_result == 2){
-		alert("해당 작가 데이터를 사용하고 있는 데이터가 있어서 삭제 할 수 없습니다.")
-	}		
-	
 
-});
-
-let moveForm = $('#moveForm');
 let searchForm = $('#searchForm');
-
-/* 페이지 이동 버튼 */
-$(".pageMaker_btn a").on("click", function(e){
-	
-	e.preventDefault();
-	
-	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	
-	moveForm.submit();
-	
-});
+let moveForm = $('#moveForm');
 
 /* 작거 검색 버튼 동작 */
 $("#searchForm button").on("click", function(e){
@@ -183,15 +149,28 @@ $("#searchForm button").on("click", function(e){
 	
 });
 
-/* 작가 상세 페이지 이동 */
-$(".move").on("click", function(e){
+
+/* 페이지 이동 버튼 */
+$(".pageMaker_btn a").on("click", function(e){
 	
 	e.preventDefault();
 	
-	moveForm.append("<input type='hidden' name='authorId' value='"+ $(this).attr("href") + "'>");
-	moveForm.attr("action", "/admin/authorDetail");
+	console.log($(this).attr("href"));
+	
+	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+	
 	moveForm.submit();
 	
+});
+
+$(".delete_btn").on("click", function(e){
+	
+	e.preventDefault();
+	
+	let id = $(this).data("orderid");
+	
+	$("#deleteForm").find("input[name='orderId']").val(id);
+	$("#deleteForm").submit();
 });
 
 </script>

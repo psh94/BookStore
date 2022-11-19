@@ -95,7 +95,7 @@ ul{
 .admin_content_wrap{
     width: 80%;
     float:left;
-    min-height:700px;
+    min-height:700px;  
 }
 /* 관리자 컨텐츠 제목 영역 */
 .admin_content_subject{	
@@ -148,7 +148,6 @@ ul{
     color: #e05757;
     font-weight: 300;    
 }
-
 
 
 /* 버튼 영역 */

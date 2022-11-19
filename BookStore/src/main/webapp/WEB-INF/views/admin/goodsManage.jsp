@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/admin/goodsManage.css">
- 
+
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -16,10 +16,11 @@
 </head>
 </head>
 <body>
-     			<%@include file="../includes/admin/header.jsp" %>
 
+				<%@include file="../includes/admin/header.jsp" %>
+				
                 <div class="admin_content_wrap">
-                    <div class="admin_content_subject"><span>상품 등록</span></div>
+                    <div class="admin_content_subject"><span>상품 관리</span></div>
                     <div class="goods_table_wrap">
                     	<!-- 상품 리스트 O -->
 	                    <c:if test="${listcheck != 'empty'}">
@@ -38,10 +39,10 @@
 	                    		<tr>
 	                    			<td><c:out value="${list.bookId}"></c:out></td>
 	                    			<td>
-		                    			<a class="move" href='<c:out value="${list.bookId}"/>'>
-											<c:out value="${list.bookName}"></c:out>
-										</a>
-									</td>
+	                    				<a class="move" href='<c:out value="${list.bookId}"/>'>
+	                    					<c:out value="${list.bookName}"></c:out>
+	                    				</a>
+	                    			</td>
 	                    			<td><c:out value="${list.authorName}"></c:out></td>
 	                    			<td><c:out value="${list.cateName}"></c:out></td>
 	                    			<td><c:out value="${list.bookStock}"></c:out></td>
@@ -103,22 +104,16 @@
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 	</form>
+                    
                 </div>
-				<%@include file="../includes/admin/footer.jsp" %>
-                
  
+ 				<%@include file="../includes/admin/footer.jsp" %>
 <script>
-
-
-let searchForm = $('#searchForm');
-let moveForm = $('#moveForm');
-
 $(document).ready(function(){
 	
+	/* 등록 성공 이벤트 */
 	let eResult = '<c:out value="${enroll_result}"/>';
-	
 	checkResult(eResult);
-	
 	function checkResult(result){
 		
 		if(result === ''){
@@ -128,9 +123,25 @@ $(document).ready(function(){
 		alert("상품'"+ eResult +"'을 등록하였습니다.");
 		
 	}
+	
+	/* 수정 성공 이벤트 */
+	let modify_result = '${modify_result}';
+	
+	if(modify_result == 1){
+		alert("수정 완료");
+	}	
+	
+	/* 삭제 결과 경고창 */
+	let delete_result = '${delete_result}';
+	
+	if(delete_result == 1){
+		alert("삭제 완료");
+	}	
 
 });
 
+let searchForm = $('#searchForm');
+let moveForm = $('#moveForm');
 
 /* 작거 검색 버튼 동작 */
 $("#searchForm button").on("click", function(e){
@@ -174,6 +185,6 @@ $(".move").on("click", function(e){
 });
 
 </script>
- 
+
 </body>
 </html>

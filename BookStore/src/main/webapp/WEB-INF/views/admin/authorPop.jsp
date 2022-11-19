@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../resources/css/admin/authorPop.css">
 <script
@@ -14,21 +14,22 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="subject_name_warp">
-			<span>ÀÛ°¡ ¼±ÅÃ</span>
+	<div class="wrapper">
+		<div class="subject_name_warp">
+			<span>ì‘ê°€ ì„ íƒ</span>
 		</div>
 		<div class="content_wrap">
-               	<!-- °Ô½Ã¹° Ç¥ ¿µ¿ª -->
+               	<!-- ê²Œì‹œë¬¼ í‘œ ì˜ì—­ -->
 				<div class="author_table_wrap">
-               		<!-- °Ô½Ã¹° O -->
+               		<!-- ê²Œì‹œë¬¼ O -->
                		<c:if test="${listCheck != 'empty'}">
                			<div class="table_exist">
 	                    	<table class="author_table">
 	                    		<thead>
 	                    			<tr>
-	                    				<td class="th_column_1">ÀÛ°¡ ¹øÈ£</td>
-	                    				<td class="th_column_2">ÀÛ°¡ ÀÌ¸§</td>
-	                    				<td class="th_column_3">ÀÛ°¡ ±¹°¡</td>
+	                    				<td class="th_column_1">ì‘ê°€ ë²ˆí˜¸</td>
+	                    				<td class="th_column_2">ì‘ê°€ ì´ë¦„</td>
+	                    				<td class="th_column_3">ì‘ê°€ êµ­ê°€</td>
 	                    			</tr>
 	                    		</thead>
 	                    		<c:forEach items="${list}" var="list">
@@ -37,7 +38,7 @@
 	                    			<td>
 	                    				<a class="move" href='<c:out value="${list.authorId}"/>' data-name='<c:out value="${list.authorName}"/>'>
 	                    					<c:out value="${list.authorName}"></c:out>
-	                    				</a>
+	                    				</a> 
 	                    			</td>
 	                    			<td><c:out value="${list.nationName}"></c:out> </td>
 	                    		</tr>
@@ -45,48 +46,48 @@
 	                    	</table>
                     	</div>                			
                		</c:if>
-               		<!-- °Ô½Ã¹° x -->
+               		<!-- ê²Œì‹œë¬¼ x -->
                		<c:if test="${listCheck == 'empty'}">
                			<div class="table_empty">
-               				µî·ÏµÈ ÀÛ°¡°¡ ¾ø½À´Ï´Ù.
+               				ë“±ë¡ëœ ì‘ê°€ê°€ ì—†ìŠµë‹ˆë‹¤.
                			</div>
                		</c:if>
                		
-                    <!-- °Ë»ö ¿µ¿ª -->
+                    <!-- ê²€ìƒ‰ ì˜ì—­ -->
                     <div class="search_wrap">
                     	<form id="searchForm" action="/admin/authorPop" method="get">
                     		<div class="search_input">
                     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"></c:out>'>
                     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum }"></c:out>'>
                     			<input type="hidden" name="amount" value='${pageMaker.cri.amount}'>
-                    			<button class='btn search_btn'>°Ë »ö</button>
+                    			<button class='btn search_btn'>ê²€ ìƒ‰</button>
                     		</div>
                     	</form>
                     </div>
                     
-                    <!-- ÆäÀÌÁö ÀÌµ¿ ÀÎÅÍÆäÀÌ½º ¿µ¿ª -->
+                    <!-- í˜ì´ì§€ ì´ë™ ì¸í„°í˜ì´ìŠ¤ ì˜ì—­ -->
                     <div class="pageMaker_wrap" >
                     
 	                    <ul class="pageMaker">
 	                    
-	                    	<!-- ÀÌÀü ¹öÆ° -->
+	                    	<!-- ì´ì „ ë²„íŠ¼ -->
 	                    	<c:if test="${pageMaker.prev}">
 	                    		<li class="pageMaker_btn prev">
-	                    			<a href="${pageMaker.pageStart - 1}">ÀÌÀü</a>
+	                    			<a href="${pageMaker.pageStart - 1}">ì´ì „</a>
 	                    		</li>
 	                    	</c:if>
 	                    	
-	                    	<!-- ÆäÀÌÁö ¹øÈ£ -->
+	                    	<!-- í˜ì´ì§€ ë²ˆí˜¸ -->
 	                    	<c:forEach begin="${pageMaker.pageStart}" end="${pageMaker.pageEnd}" var="num">
 	                    		<li class="pageMaker_btn ${pageMaker.cri.pageNum == num ? "active":""}">
 	                    			<a href="${num}">${num}</a>
 	                    		</li>
 	                    	</c:forEach>
 	                    	
-	                    	<!-- ´ÙÀ½ ¹öÆ° -->
+	                    	<!-- ë‹¤ìŒ ë²„íŠ¼ -->
 	                    	<c:if test="${pageMaker.next}">
 	                    		<li class="pageMaker_btn next">
-	                    			<a href="${pageMaker.pageEnd + 1 }">´ÙÀ½</a>
+	                    			<a href="${pageMaker.pageEnd + 1 }">ë‹¤ìŒ</a>
 	                    		</li>
 	                    	</c:if>
 	                    	
@@ -104,59 +105,56 @@
 		</div>
 
 	</div>
-	
-<script>
+	<script>
 
-let searchForm = $('#searchForm');
-let moveForm = $('#moveForm');
+		let searchForm = $('#searchForm');
+		let moveForm = $('#moveForm');
+		
+		/* ì‘ê±° ê²€ìƒ‰ ë²„íŠ¼ ë™ì‘ */
+		$("#searchForm button").on("click", function(e){
+			
+			e.preventDefault();
+			
+			/* ê²€ìƒ‰ í‚¤ì›Œë“œ ìœ íš¨ì„± ê²€ì‚¬ */
+			if(!searchForm.find("input[name='keyword']").val()){
+				alert("í‚¤ì›Œë“œë¥¼ ì…ë ¥í•˜ì‹­ì‹œì˜¤");
+				return false;
+			}
+			
+			searchForm.find("input[name='pageNum']").val("1");
+			
+			searchForm.submit();
+			
+		});
+		
+		
+		/* í˜ì´ì§€ ì´ë™ ë²„íŠ¼ */
+		$(".pageMaker_btn a").on("click", function(e){
+			
+			e.preventDefault();
+			
+			console.log($(this).attr("href"));
+			
+			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+			
+			moveForm.submit();
+			
+		});	
+		
+		/* ì‘ê°€ ì„ íƒ ë° íŒì—…ì°½ ë‹«ê¸° */
+		$(".move").on("click", function(e){
+			
+			e.preventDefault();
+			
+			let authorId = $(this).attr("href");
+			let authorName= $(this).data("name");
+			$(opener.document).find("#authorId_input").val(authorId);
+			$(opener.document).find("#authorName_input").val(authorName);
+			
+			window.close();
 
-/* ÀÛ°Å °Ë»ö ¹öÆ° µ¿ÀÛ */
-$("#searchForm button").on("click", function(e){
+		});		
 	
-	e.preventDefault();
-	
-	/* °Ë»ö Å°¿öµå À¯È¿¼º °Ë»ç */
-	if(!searchForm.find("input[name='keyword']").val()){
-		alert("Å°¿öµå¸¦ ÀÔ·ÂÇÏ½Ê½Ã¿À");
-		return false;
-	}
-	
-	searchForm.find("input[name='pageNum']").val("1");
-	
-	searchForm.submit();
-	
-});
-
-
-/* ÆäÀÌÁö ÀÌµ¿ ¹öÆ° */
-$(".pageMaker_btn a").on("click", function(e){
-	
-	e.preventDefault();
-	
-	console.log($(this).attr("href"));
-	
-	moveForm.find("input[name='pageNum']").val($(this).attr("href"));
-	
-	moveForm.submit();
-	
-});	
-
-/* ÀÛ°¡ ¼±ÅÃ ¹× ÆË¾÷Ã¢ ´İ±â */
-$(".move").on("click", function(e){
-	
-	e.preventDefault();
-	
-	let authorId = $(this).attr("href");
-	let authorName= $(this).data("name");
-	$(opener.document).find("#authorId_input").val(authorId);
-	$(opener.document).find("#authorName_input").val(authorName);
-	
-	window.close();
-
-});	
-
-	
-	</script>	
-	
+	</script>
 </body>
 </html>

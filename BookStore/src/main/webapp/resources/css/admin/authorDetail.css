@@ -6,10 +6,6 @@
 a{
 	text-decoration: none;
 }
-a:link {color: black;}
-a:visited {color: black;}
-a:active {color: black;}
-a:hover {color: black;}
 ul{
     list-style: none;
 }
@@ -48,7 +44,7 @@ ul{
     height:110px;
     line-height: 110px;
     background-color: #5080bd;
-    margin-bottom: 15px;
+    margin-bottom:15px;
 }
 .admin_top_wrap>span{
     margin-left: 30px;
@@ -85,11 +81,14 @@ ul{
     font-size: 30px;
     font-weight: bolder;
 }
- 
+.admin_navi_wrap li a:link {color: black;}
+.admin_navi_wrap li a:visited {color: black;}
+.admin_navi_wrap li a:active {color: black;}
+.admin_navi_wrap li a:hover {color: black;}
+
 .admin_list_04{
     background-color: #c8c8c8;
 } 
-
 
 
 /* 관리자페이지 컨텐츠 영역 */
@@ -148,16 +147,6 @@ ul{
 .input_block{
 	background-color:#f9f9f9;	
 }
-
-/* 입력란 공란 경고 태그 */
-.form_section_content span{	
-	display: none;
-    padding-top: 10px;
-    text-align: center;
-    color: #e05757;
-    font-weight: 300;    
-}
-
 
 
 /* 버튼 영역 */
@@ -240,6 +229,7 @@ ul{
 	margin-left: 70px;
 	margin-top : 30px;
 }
+
 
 
 

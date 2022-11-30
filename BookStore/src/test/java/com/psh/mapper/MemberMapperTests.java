@@ -33,7 +33,6 @@ public class MemberMapperTests {
 //		
 //		//패지키 설정 잘못하면 error 발생
 //		memberMapper.memberJoin(member);			//쿼리 메서드 실행
-//		
 //	}
 //	
 	
